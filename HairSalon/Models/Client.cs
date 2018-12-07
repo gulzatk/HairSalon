@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using HairSalon;
 
 namespace HairSalon.Models
 {
@@ -8,9 +7,9 @@ namespace HairSalon.Models
     {
       private string _clientName;
       private int _id;
-      private int _stylistId
+      private int _stylistId;
 
-      public Client(string name, int stylistId int id = 0)
+      public Client(string name, int stylistId, int id = 0)
       {
         _clientName = name;
         _stylistId = stylistId;
@@ -22,7 +21,7 @@ namespace HairSalon.Models
         return _clientName;
       }
 
-      public int GetId();
+      public int GetId()
       {
         return _id;
       }
@@ -45,7 +44,7 @@ namespace HairSalon.Models
        int clientId = rdr.GetInt32(0);
        string clientName = rdr.GetString(1);
        int stylistId = rdr.GetInt32(2);
-       Client newClient = new Client(clienttName, stylistId, clienttId);
+       Client newClient = new Client(clientName, stylistId, clientId);
        allClients.Add(newClient);
      }
      conn.Close();
@@ -152,7 +151,7 @@ namespace HairSalon.Models
      {
        Client newClient = (Client) otherClient;
        bool idEquality = this.GetId() == newClient.GetId();
-       bool nameEquality = this.GetName() == newClient.GetName();
+       bool nameEquality = this.GetClientName() == newClient.GetClientName();
        bool stylistIdEquality = this.GetStylistId() == newClient.GetStylistId();
        return (idEquality && nameEquality && stylistIdEquality);
      }
@@ -181,28 +180,28 @@ namespace HairSalon.Models
      }
    }
 
-   // public void Edit(string newName)
-   // {
-   //   MySqlConnection conn = DB.Connection();
-   //   conn.Open();
-   //   var cmd = conn.CreateCommand() as MySqlCommand;
-   //   cmd.CommandText = @"UPDATE clients SET name = @newName WHERE id = @searchId;";
-   //   MySqlParameter searchId = new MySqlParameter();
-   //   searchId.ParameterName = "@searchId";
-   //   searchId.Value = _id;
-   //   cmd.Parameters.Add(searchId);
-   //   MySqlParameter name = new MySqlParameter();
-   //   name.ParameterName = "@newName";
-   //   name.Value = _clientName;
-   //   cmd.Parameters.Add(name);
-   //   cmd.ExecuteNonQuery();
-   //   _clientName = newName;
-   //   conn.Close();
-   //   if (conn != null)
-   //   {
-   //     conn.Dispose();
-   //   }
-   // }
+   public void Edit(string newName)
+   {
+     MySqlConnection conn = DB.Connection();
+     conn.Open();
+     var cmd = conn.CreateCommand() as MySqlCommand;
+     cmd.CommandText = @"UPDATE clients SET name = @newName WHERE id = @searchId;";
+     MySqlParameter searchId = new MySqlParameter();
+     searchId.ParameterName = "@searchId";
+     searchId.Value = _id;
+     cmd.Parameters.Add(searchId);
+     MySqlParameter name = new MySqlParameter();
+     name.ParameterName = "@newName";
+     name.Value = _clientName;
+     cmd.Parameters.Add(name);
+     cmd.ExecuteNonQuery();
+     _clientName = newName;
+     conn.Close();
+     if (conn != null)
+     {
+       conn.Dispose();
+     }
+   }
 
  }
 }
