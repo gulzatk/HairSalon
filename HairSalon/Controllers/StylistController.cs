@@ -34,9 +34,9 @@ namespace HairSalon.Controllers
       {
         Dictionary<string, object> model = new Dictionary<string, object>();
         Stylist selectedStylist = Stylist.Find(id);
-        List<Client> stylistClient = selectedStylist.GetClients();
+        List<Client> stylistClients = selectedStylist.GetClients();
         model.Add("stylist", selectedStylist);
-        model.Add("clients", stylistClient);
+        model.Add("clients", stylistClients);
         return View(model);
       }
 
@@ -45,9 +45,9 @@ namespace HairSalon.Controllers
       {
         Dictionary<string, object> model = new Dictionary<string, object>();
         Stylist stylist = Stylist.Find(id);
-        List<Client> stylistClient = stylist.GetClients();
+        List<Client> stylistClients = stylist.GetClients();
 
-        foreach(Client client in stylistClient)
+        foreach(Client client in stylistClients)
         {
           Client.DeleteClient(client.GetId());
         }
@@ -55,7 +55,7 @@ namespace HairSalon.Controllers
         Stylist.DeleteStylist(id);
 
         model.Add("stylist", stylist);
-        model.Add("clients", stylistClient);
+        model.Add("clients", stylistClients);
         return View("Delete", model);
 
       }

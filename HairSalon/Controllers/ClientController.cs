@@ -45,7 +45,7 @@ namespace HairSalon.Controllers
        Stylist stylist = Stylist.Find(stylistId);
        model.Add("stylist", stylist);
        Client client = Client.Find(clientId);
-       model.Add("clients", client);
+       model.Add("client", client);
        return View(model);
      }
 
@@ -57,7 +57,7 @@ namespace HairSalon.Controllers
        Dictionary<string, object> model = new Dictionary<string, object>();
        Stylist stylist = Stylist.Find(stylistId);
        model.Add("stylist", stylist);
-       model.Add("clients", client);
+       model.Add("client", client);
        return View("Show", model);
      }
   }

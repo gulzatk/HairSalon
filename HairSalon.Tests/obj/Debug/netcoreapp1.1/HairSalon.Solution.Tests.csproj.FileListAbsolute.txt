@@ -1,0 +1,5 @@
+C:\Users\gulza\epicodus\CSharp\HairSalon.Solution\HairSalon.Tests\bin\Debug\netcoreapp1.1\HairSalon.Solution.Tests.deps.json
+C:\Users\gulza\epicodus\CSharp\HairSalon.Solution\HairSalon.Tests\bin\Debug\netcoreapp1.1\HairSalon.Solution.Tests.runtimeconfig.json
+C:\Users\gulza\epicodus\CSharp\HairSalon.Solution\HairSalon.Tests\bin\Debug\netcoreapp1.1\HairSalon.Solution.Tests.runtimeconfig.dev.json
+C:\Users\gulza\epicodus\CSharp\HairSalon.Solution\HairSalon.Tests\obj\Debug\netcoreapp1.1\HairSalon.Solution.Tests.csproj.CoreCompileInputs.cache
+C:\Users\gulza\epicodus\CSharp\HairSalon.Solution\HairSalon.Tests\obj\Debug\netcoreapp1.1\HairSalon.Solution.Tests.AssemblyInfo.cs

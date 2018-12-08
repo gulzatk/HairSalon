@@ -21,6 +21,11 @@ namespace HairSalon.Models
         return _clientName;
       }
 
+      public void SetName(string newName)
+      {
+        _clientName = newName;
+      }
+
       public int GetId()
       {
         return _id;
@@ -161,6 +166,7 @@ namespace HairSalon.Models
    {
      MySqlConnection conn = DB.Connection();
      conn.Open();
+
      var cmd = conn.CreateCommand() as MySqlCommand;
      cmd.CommandText = @"INSERT INTO clients (name, stylistId) VALUES (@name,  @stylistId);";
      MySqlParameter name = new MySqlParameter();
