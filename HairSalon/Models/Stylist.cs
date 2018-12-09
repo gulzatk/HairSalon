@@ -115,7 +115,7 @@ namespace HairSalon.Models
             int clientId = rdr.GetInt32(0);
             string clientName = rdr.GetString(1);
             int clientStylistId = rdr.GetInt32(2);
-            Client newClient = new Client(clientName, clientId,  clientStylistId);
+            Client newClient = new Client(clientName, clientStylistId, clientId);
             allClients.Add(newClient);
           }
             conn.Close();
@@ -181,6 +181,39 @@ namespace HairSalon.Models
       if (conn != null)
       {
        conn.Dispose();
+      }
+    }
+
+    public void Edit(string newStylistName, string newdescription)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE stylists SET name = @newStylistName, description = @newdescription WHERE id = @searchId;";
+
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = _id;
+      cmd.Parameters.Add(searchId);
+
+      MySqlParameter stylistName = new MySqlParameter();
+      stylistName.ParameterName = "@newStylistName";
+      stylistName.Value = newStylistName;
+      cmd.Parameters.Add(stylistName);
+
+      MySqlParameter description = new MySqlParameter();
+      description.ParameterName = "@newdescription";
+      description.Value = newdescription;
+      cmd.Parameters.Add(description);
+
+
+      cmd.ExecuteNonQuery();
+      _name = newStylistName;
+      _description = newdescription;
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
       }
     }
 

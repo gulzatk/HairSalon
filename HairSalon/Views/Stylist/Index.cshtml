@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-<div class="container">
+<div class="container text-center">
 
   <h1>List of Stylists in our HairSalon:</h1>
 
@@ -13,11 +13,12 @@
 
   @foreach (var stylist in Model)
   {
-    <h3><a href='/stylists/@stylist.GetId()'>@stylist.GetName(), @stylist.GetDescription()</a></h3>
-    <p><a href='/stylists/@stylist.GetId()/delete'>Remove this stylist from list</a></p>
+    <h3><a href='/stylists/@stylist.GetId()'>@stylist.GetName()</a></h3>
+    <button class="btn btn-danger"><a href='/stylists/@stylist.GetId()/delete'>Delete</a></button>
+    <button class="btn btn-info"><a href='/stylists/@stylist.GetId()/edit'>Edit</a></button>
     <br>
   }
-
-  <p><a href='/stylists/new'>Add a new stylist</a></p>
+  <br>
+  <p><a href='/stylists/new'>Add a new stylist</a></p><br>
   <p><a href='/'>Home Page</a></p>
 </div>
