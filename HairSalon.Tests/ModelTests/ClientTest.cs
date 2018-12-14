@@ -43,12 +43,12 @@ namespace HairSalon.Tests
        // Arrange
        string name = "gulzat";
        int stylistId = 2;
-       Client newClient = new Client(name, stylistId);
+       int id = 5;
+       Client newClient = new Client(name, stylistId, id);
        // Act
-       newClient.Save();
        int result = newClient.GetId();
        // Assert
-       Assert.AreEqual(2, result);
+       Assert.AreEqual(id, result);
      }
 
      [TestMethod]
@@ -73,19 +73,36 @@ namespace HairSalon.Tests
        CollectionAssert.AreEqual(expected, result);
      }
 
-    [TestMethod]
-    public void Save_SavesClientToDatabase_ClientList()
-    {
-      //Arrange
-      Client testClient = new Client("jibek", 2);
-      testClient.Save();
+     [TestMethod]
+     public void Save_SavesClientToDatabase_ClientList()
+     {
+       //Arrange
+       Client testClient = new Client("jibek", 2);
 
-      //Act
-      List<Client> result = Client.GetAll();
-      List<Client> testList = new List<Client>{testClient};
+       //Act
+       testClient.Save();
+       List<Client> result = Client.GetAll();
+       List<Client> testList = new List<Client>{testClient};
 
-      //Assert
+       //Assert
       CollectionAssert.AreEqual(testList, result);
-    }
+     }
+
+     [TestMethod]
+      public void Save_DatabaseAssignsIdToClient_Id()
+      {
+        //Arrange
+        Client testClient = new Client("jibek", 2);
+        testClient.Save();
+
+        //Act
+        Client savedClient = Client.GetAll()[0];
+
+        int result = savedClient.GetId();
+        int testId = testClient.GetId();
+
+        //Assert
+        Assert.AreEqual(testId, result);
+      }
   }
 }

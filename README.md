@@ -25,7 +25,7 @@ A website that uses a database to sho show the user all about the stylists and t
 
 ## Setup/Installation Requirements
 
-1. Clone this repository: https://github.com/gulzatk/HairSalon.git
+1. Clone this repository: https://github.com/gulzatk/HairSalon.Solution.git
 
 2. Create a database needed for this application.
   * CREATE DATABASE gulzat_karimova;

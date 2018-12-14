@@ -33,8 +33,7 @@ namespace HairSalon.Tests
    {
      //Arrange
      string name = "gulzat";
-     string description = "color";
-     Stylist newStylist = new Stylist(name, description, 2);
+     Stylist newStylist = new Stylist(name, "description", 2);
 
      //Act
      string result = newStylist.GetName();
@@ -64,14 +63,14 @@ namespace HairSalon.Tests
      //Arrange
       string name = "Test Category";
       string description = "cut";
-      Stylist newStylist = new Stylist(name, description, 2);
+      int id = 4;
+      Stylist newStylist = new Stylist(name, description, id);
 
       //Act
-      newStylist.Save();
       int result = newStylist.GetId();
 
       //Assert
-      Assert.AreEqual(2, result);
+      Assert.AreEqual(id, result);
    }
 
    [TestMethod]
@@ -130,20 +129,7 @@ namespace HairSalon.Tests
      Assert.AreEqual(name2, result);
     }
 
-    [TestMethod]
-    public void Save_SavesStylistToDatabase_StylistList()
-    {
-      //Arrange
-      Stylist testStylist = new Stylist("jibek", "cut");
-      testStylist.Save();
 
-      //Act
-      List<Stylist> result = Stylist.GetAll();
-      List<Stylist> testList = new List<Stylist>{testStylist};
-
-      //Assert
-      CollectionAssert.AreEqual(testList, result);
-    }
 
       [TestMethod]
       public void GetStylist_ReturnsEmptyList_AfterDelete()
@@ -153,13 +139,13 @@ namespace HairSalon.Tests
         string description = "cut";
         Stylist newStylist = new Stylist(name, description);
         newStylist.Save();
-        Stylist.DeleteStylist(newStylist.GetId());
 
         //Act
-        List<Stylist> result = Stylist.GetAll();
-        List<Stylist> newList = new List<Stylist> {};
+        Stylist.DeleteStylist(newStylist.GetId());
 
         //Assert
+        List<Stylist> result = Stylist.GetAll();
+        List<Stylist> newList = new List<Stylist> {};
         CollectionAssert.AreEqual(newList, result);
       }
 
@@ -180,5 +166,37 @@ namespace HairSalon.Tests
        //Assert
        CollectionAssert.AreEqual(newList, result);
      }
+
+     [TestMethod]
+     public void Save_SavesStylistToDatabase_StylistList()
+     {
+       //Arrange
+       Stylist testStylist = new Stylist("jibek", "cut");
+
+       //Act
+       testStylist.Save();
+       List<Stylist> result = Stylist.GetAll();
+       List<Stylist> testList = new List<Stylist>{testStylist};
+
+       //Assert
+      CollectionAssert.AreEqual(testList, result);
+     }
+
+      [TestMethod]
+       public void Save_DatabaseAssignsIdToStylist_Id()
+       {
+         //Arrange
+         Stylist testStylist = new Stylist("gulzat", "color");
+         testStylist.Save();
+
+         //Act
+         Stylist savedStylist = Stylist.GetAll()[0];
+
+         int result = savedStylist.GetId();
+         int testId = testStylist.GetId();
+
+         //Assert
+         Assert.AreEqual(testId, result);
+       }
   }
 }
